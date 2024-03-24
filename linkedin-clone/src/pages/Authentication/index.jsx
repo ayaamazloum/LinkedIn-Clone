@@ -8,15 +8,13 @@ import { useState } from "react";
 const Authentication = () => {
     const [isLogin, setIsLogin] = useState(true);
 
-    const handleLogin = (login) => { setIsLogin(login); };
-
     return (
-        <div className="flex center page auth-page">
+        <div className="flex column center page auth-page">
             <img className="logo" src={Logo} alt="LinkedIn" /> 
-            {isLogin? (<Login handleLogin={handleLogin} />) : (<Signup handleLogin={handleLogin} />)}
+            {isLogin ? (<Login />) : (<Signup />)}
+            <p className="mt-50">New to LinkedIn? <span className="primary-text pointer">Join now</span></p>
         </div>
     );
-
 };
 
 export default Authentication;

@@ -4,3 +4,23 @@
   left: 60px;
   width: 140px;
 }
+
+.login-box {
+  padding: 30px 25px;
+}
+
+.login-box input {
+  padding: 20px;
+  width: 350px;
+  font-size: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+}
+
+.login-box input:focus {
+  outline: 2px solid #0a66c2;
+}
+
+.login-box button {
+  padding: 22px;
+  font-size: 20px;
+}
