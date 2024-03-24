@@ -6,39 +6,17 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({ email: "", password: "" });
-
     const [error, setError] = useState("");
 
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
-    const login = () => {
-        if (!error == "")
-            return;
-
-        const formData = new FormData();
-        formData.append('email', credentials.email);
-        formData.append('password', credentials.password);
-        
-        axios.post("http://127.0.0.1/LinkedIn-Clone/Backend/login.php", formData)
-            .then((response) => {
-                localStorage.setItem('user_id', parseInt(response.data.user_id));
-                localStorage.setItem('role', response.data.role);
-                localStorage.setItem('first_name', response.data.first_name);
-                localStorage.setItem('last_name', response.data.last_name);
-                navigate('/home');
-            }).catch(function (error) {
-                console.error('Error fetching data:', error);
-              });
-    }
-
     useEffect(() => {
-        console.log(error);
         if (!emailRegex.test(credentials.email)) {
-          setError("Invalid email");
+          setError("Invalid email.");
         } else if (credentials.password.length < 6) {
-          setError("Short password");
+          setError("Short password.");
         } else {
-          setError("");
+          setError("valid");
         }
     }, [credentials]);
 
@@ -69,11 +47,33 @@ const Login = () => {
                 }}
             />
 
-            {error !== "" && <p className="sm red-text mt-5">{error}</p>}
+            {error !== "" && error !== "valid" && <p className="extra-sm red-text mt-5">{error}</p>}
 
             <button
                 className="white-text primary-bg extra-rounded mt-30 pointer"
-                onClick={() => login()}>Sign in
+                onClick={() => {
+                    if (error !== "valid")
+                        return;
+
+                    const formData = new FormData();
+                    formData.append('email', credentials.email);
+                    formData.append('password', credentials.password);
+                    
+                    axios.post("http://127.0.0.1/LinkedIn-Clone/Backend/login.php", formData)
+                        .then((response) => {
+                            if (response.status !== "logged in") {
+                                setError("Incorrect credentials.");
+                                return;
+                            }
+                            localStorage.setItem('user_id', parseInt(response.data.user_id));
+                            localStorage.setItem('role', response.data.role);
+                            localStorage.setItem('first_name', response.data.first_name);
+                            localStorage.setItem('last_name', response.data.last_name);
+                            navigate('/home');
+                        }).catch(function (error) {
+                            console.error('Error fetching data:', error);
+              });
+                }}>Sign in
             </button>
         </div>
     );

@@ -20,7 +20,23 @@
   outline: 2px solid #0a66c2;
 }
 
-.login-box button {
-  padding: 22px;
+.login-box button,
+.signup-box button {
+  padding: 20px;
   font-size: 20px;
+}
+
+.signup-box {
+  padding: 30px 25px;
+  width: 500px;
+}
+
+label {
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 18px;
+}
+
+.signup-box input {
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  padding: 12px;
 }

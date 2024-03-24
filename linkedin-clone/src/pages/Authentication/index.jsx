@@ -12,7 +12,19 @@ const Authentication = () => {
         <div className="flex column center page auth-page">
             <img className="logo" src={Logo} alt="LinkedIn" /> 
             {isLogin ? (<Login />) : (<Signup />)}
-            <p className="mt-50">New to LinkedIn? <span className="primary-text pointer">Join now</span></p>
+            {isLogin ? (<p className="mt-50">New to LinkedIn?
+                <span
+                    className="primary-text pointer"
+                    onClick={() => setIsLogin(false)}> Join now
+                </span>
+            </p>) :
+                (<p className="mt-50">Already on LinkedIn?
+                    <span
+                        className="primary-text pointer"
+                        onClick={() => setIsLogin(true)}> Sign in
+                    </span>
+                </p>
+            )}
         </div>
     );
 };
