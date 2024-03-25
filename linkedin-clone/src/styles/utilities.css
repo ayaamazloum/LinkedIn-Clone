@@ -43,6 +43,14 @@
   gap: 10px;
 }
 
+.gap-30 {
+  gap: 30px;
+}
+
+.gap-50 {
+  gap: 50px;
+}
+
 .full-width {
   width: 100%;
 }
@@ -114,6 +122,14 @@
 
 .mt-50 {
   margin-top: 50px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.pb-70 {
+  padding-bottom: 70px;
 }
 
 .pointer {
