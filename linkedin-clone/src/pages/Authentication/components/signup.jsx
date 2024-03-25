@@ -6,7 +6,7 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const [info, setInfo] = useState({ email: "", password: "", profileType: "user", firstName: "", lastName: "", companyName: "", location: "" });
-    const [errors, setErrors] = useState({ email: "", password: "", firstName: "", lastName: "", companyName: "", location: "" });
+    const [errors, setErrors] = useState({ email: "", password: "", firstName: "", lastName: "", companyName: "", location: "", response: "" });
 
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
@@ -39,7 +39,7 @@ const Signup = () => {
                             ...info,
                             password: e.target.value,
                         });
-                        info.password.length < 6
+                        info.password.length < 5
                         ? setErrors({ ...errors, password: "Short password." })
                         : setErrors({ ...errors, password: "valid" });
                     }}
@@ -131,13 +131,38 @@ const Signup = () => {
                 />
                 {errors.location !== "" && errors.location !== "valid" && <p className="extra-sm red-text mt-5">{errors.location}</p>}
                 
-
+                {errors.response !== "" && <p className="extra-sm red-text mt-5">{errors.response}</p>}
+                 
                 <button
                     className="white-text primary-bg extra-rounded mt-30 pointer"
                     onClick={() => {
                         if (errors.email !== "valid" || errors.password !== "valid" || (errors.companyName !== "valid" &&
                             (errors.firstName !== "valid" && errors.lastName !== "valid")) || errors.location !== "valid")
                             return;
+
+                        const formData = new FormData();
+                        formData.append('email', info.email);
+                        formData.append('password', info.password);
+                        formData.append('profile_type', info.profileType);
+                        formData.append('company_name', info.companyName);
+                        formData.append('first_name', info.firstName);
+                        formData.append('lasr_name', info.lastName);
+                        formData.append('location', info.location);
+                        
+                        axios.post("http://127.0.0.1/LinkedIn-Clone/Backend/signup.php", formData)
+                            .then((response) => {
+                                if (response.data.status == "user already exists") {
+                                    setErrors({ ...errors, response: "Email already exists." })
+                                    return;
+                                }
+                                localStorage.setItem('user_id', parseInt(response.data.user_id));
+                                localStorage.setItem('role', response.data.role);
+                                localStorage.setItem('first_name', response.data.first_name);
+                                localStorage.setItem('last_name', response.data.last_name);
+                                navigate('/home');
+                            }).catch(function (error) {
+                                console.error('Error fetching data:', error);
+                            });
                     }}>Join
                 </button>
             </div>

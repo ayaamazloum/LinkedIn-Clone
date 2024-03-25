@@ -39,4 +39,5 @@ label {
 .signup-box input {
   border: 1px solid rgba(0, 0, 0, 0.9);
   padding: 12px;
+  font-size: 18px;
 }
