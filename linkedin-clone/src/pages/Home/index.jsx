@@ -1,7 +1,10 @@
+import Header from "../Header/header";
 import "./style.css";
 
 const Home = () => {
-    return <div></div>
+    return <div className="full-width">
+        <Header/>
+    </div>
 };
 
 export default Home;

@@ -1,0 +1,40 @@
+.header {
+  gap: 30px;
+  background-color: #fff;
+  padding: 10px 5%;
+  justify-content: space-between;
+}
+
+.header-logo {
+  width: 40px;
+}
+
+.search-box {
+  background-color: #d9e3ed7d;
+  padding: 10px 20px;
+}
+
+.search-box > img {
+  width: 20px;
+}
+
+.search-box > input {
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.search-box > input:focus {
+  outline: none;
+}
+
+.signout {
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 40px;
+}
+
+.signout:hover {
+  color: #0a66c2;
+}
