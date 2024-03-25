@@ -36,8 +36,7 @@ if ($email_exists == 0) {
     }
     else {
         $company_name = $_POST['company_name'];
-
-        $query3 = $mysqli->prepare('insert into company_info(user_id,company_name,location) values(?,?,?)');
+        $query3 = $mysqli->prepare('insert into company_info(company_id,name,location) values(?,?,?)');
         $query3->bind_param('sss', $id, $company_name, $location);
         $query3->execute();
     }

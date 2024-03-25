@@ -155,11 +155,17 @@ const Signup = () => {
                                     setErrors({ ...errors, response: "Email already exists." })
                                     return;
                                 }
+                                info.profileType == 'user' ?
                                 localStorage.setItem('user', JSON.stringify({
-                                    user_id: parseInt(response.data.user_id),
+                                    user_id: response.data['user_id'],
                                     role: info.profileType,
                                     first_name: info.firstName,
                                     last_name: info.lastName
+                                }))
+                                : localStorage.setItem('user', JSON.stringify({
+                                    user_id: response.data['user_id'],
+                                    role: info.profileType,
+                                    company_name: info.companyName
                                 }));
                                 navigate('/home');
                             }).catch(function (error) {
