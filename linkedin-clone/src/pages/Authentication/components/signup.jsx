@@ -146,19 +146,21 @@ const Signup = () => {
                         formData.append('profile_type', info.profileType);
                         formData.append('company_name', info.companyName);
                         formData.append('first_name', info.firstName);
-                        formData.append('lasr_name', info.lastName);
+                        formData.append('last_name', info.lastName);
                         formData.append('location', info.location);
-                        
+                        console.log(formData);
                         axios.post("http://127.0.0.1/LinkedIn-Clone/Backend/signup.php", formData)
                             .then((response) => {
                                 if (response.data.status == "user already exists") {
                                     setErrors({ ...errors, response: "Email already exists." })
                                     return;
                                 }
-                                localStorage.setItem('user_id', parseInt(response.data.user_id));
-                                localStorage.setItem('role', response.data.role);
-                                localStorage.setItem('first_name', response.data.first_name);
-                                localStorage.setItem('last_name', response.data.last_name);
+                                localStorage.setItem('user', JSON.stringify({
+                                    user_id: parseInt(response.data.user_id),
+                                    role: info.profileType,
+                                    first_name: info.firstName,
+                                    last_name: info.lastName
+                                }));
                                 navigate('/home');
                             }).catch(function (error) {
                                 console.error('Error fetching data:', error);

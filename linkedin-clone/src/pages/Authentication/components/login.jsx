@@ -61,14 +61,17 @@ const Login = () => {
                     
                     axios.post("http://127.0.0.1/LinkedIn-Clone/Backend/login.php", formData)
                         .then((response) => {
-                            if (response.status !== "logged in") {
+                            if (response.data.status !== "logged in") {
                                 setError("Incorrect credentials.");
                                 return;
                             }
-                            localStorage.setItem('user_id', parseInt(response.data.user_id));
-                            localStorage.setItem('role', response.data.role);
-                            localStorage.setItem('first_name', response.data.first_name);
-                            localStorage.setItem('last_name', response.data.last_name);
+
+                            localStorage.setItem('user', JSON.stringify({
+                                user_id: parseInt(response.data.user_id),
+                                role: response.data.role,
+                                first_name: response.data.first_name,
+                                last_name: response.data.last_name
+                            }));
                             navigate('/home');
                         }).catch(function (error) {
                             console.error('Error fetching data:', error);

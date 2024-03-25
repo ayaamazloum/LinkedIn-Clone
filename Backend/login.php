@@ -6,7 +6,7 @@ $password = $_POST['password'];
 
 $query = $mysqli->prepare('select u.id, u.role, u.email, u.password, ui.first_name, ui.last_name
     from users u, user_info ui
-    where email=?');
+    where u.id=ui.id and email=?');
 $query->bind_param('s', $email);
 $query->execute();
 $query->store_result();
