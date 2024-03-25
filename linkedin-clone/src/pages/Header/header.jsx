@@ -8,7 +8,6 @@ import axios from 'axios';
 const Header = () => {
     const navigate = useNavigate();
 
-    const [ searchText, setSearchText ] = useState("");
     const [ usersResult, setUsersResult ] = useState();
 
     return <div className='header flex row'>
@@ -20,9 +19,13 @@ const Header = () => {
                     type='text'
                     placeholder='Search'
                     onChange={async (e) => {
-                        setSearchText(e.target.value);
+                        const text = e.target.value;
+                        if (text == "") {
+                            setUsersResult([]);
+                            return;
+                        }
                         const formData = new FormData();
-                        formData.append('text', e.target.value);
+                        formData.append('text', text);
                         const response = await axios.post("http://127.0.0.1/LinkedIn-Clone/Backend/findUsers.php", formData);
                         const result = response.data.users;
                         setUsersResult(result ?? []);
