@@ -32,10 +32,16 @@ const Header = () => {
                     }}
                 />
                 <div className='results-container rounded'>
-                    {usersResult?.map((user) => {
-                        return <div className='result-item rounded flex gap-10'>
-                            <img src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1" />
-                            <p>{user.company_name ?? user.first_name}</p>
+                    {usersResult?.map((user, index) => {
+                        return <div
+                            className='result-item rounded flex gap-10'
+                            onClick={(e) => {
+                                localStorage.setItem('userProfileId', JSON.stringify(usersResult[index]));
+                                navigate("/UserProfile");
+                            }
+                            }>
+                                <img src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1" />
+                                <p>{user.company_name ?? user.first_name}</p>
                         </div>
                     })}
                 </div>

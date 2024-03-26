@@ -135,3 +135,7 @@
 .pointer {
   cursor: pointer;
 }
+
+.primary-shadow {
+  box-shadow: 1px 1px 1px #999;
+}
