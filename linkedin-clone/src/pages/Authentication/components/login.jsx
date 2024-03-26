@@ -70,8 +70,11 @@ const Login = () => {
                                 user_id: parseInt(response.data.user_id),
                                 role: response.data.role,
                                 first_name: response.data.first_name,
-                                last_name: response.data.last_name
+                                last_name: response.data.last_name,
+                                location: response.data.location,
+                                bio: response.data.bio
                             }));
+
                             navigate('/home');
                         }).catch(function (error) {
                             console.error('Error fetching data:', error);

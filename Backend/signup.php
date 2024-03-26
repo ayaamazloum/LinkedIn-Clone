@@ -15,8 +15,8 @@ if ($email_exists == 0) {
     $profile_type = $_POST['profile_type'];
     $location = $_POST['location'];
 
-    $query1 = $mysqli->prepare('insert into users(role,email,password) values("user",?,?)');
-    $query1->bind_param('ss', $email, $hashed_password);
+    $query1 = $mysqli->prepare('insert into users(role,email,password) values(?,?,?)');
+    $query1->bind_param('sss', $profile_type, $email, $hashed_password);
     $query1->execute();
 
     $query2 = $mysqli->prepare('select id from users where email=?');

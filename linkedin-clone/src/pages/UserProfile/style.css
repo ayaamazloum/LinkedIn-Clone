@@ -29,7 +29,8 @@
 
 .info-container > button {
   border: 1px solid #0a66c2;
-  width: 80px;
+  width: fit-content;
   padding: 10px 20px;
   margin-left: 20px;
+  cursor: pointer;
 }

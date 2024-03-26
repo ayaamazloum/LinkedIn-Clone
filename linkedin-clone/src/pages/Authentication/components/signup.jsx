@@ -160,12 +160,16 @@ const Signup = () => {
                                     user_id: response.data['user_id'],
                                     role: info.profileType,
                                     first_name: info.firstName,
-                                    last_name: info.lastName
+                                    last_name: info.lastName,
+                                    location: info.location,
+                                    bio: info.bio
                                 }))
                                 : localStorage.setItem('user', JSON.stringify({
                                     user_id: response.data['user_id'],
                                     role: info.profileType,
-                                    company_name: info.companyName
+                                    company_name: info.companyName,
+                                    location: info.location,
+                                    bio: info.bio
                                 }));
                                 navigate('/home');
                             }).catch(function (error) {

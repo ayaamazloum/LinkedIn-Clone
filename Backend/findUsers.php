@@ -20,7 +20,8 @@ if ($num_rows > 0) {
             'company_name' => $company_name,
             'location' => $location,
             'industry' => $industry,
-            'description' => $description
+            'description' => $description,
+            'role' => 'company'
         ];
         $users[] = $user;
     }
@@ -41,7 +42,8 @@ if ($num_rows > 0) {
             'last_name' => $last_name,
             'phone_number' => $phone_number,
             'location' => $location,
-            'bio' => $bio
+            'bio' => $bio,
+            'role' => 'user'
         ];
         $users[] = $user;
     }
